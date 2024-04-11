@@ -1,0 +1,49 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+class Age{
+    public:
+int age;
+Age(){
+    age=0;
+}
+void setAge(int a){
+    age=a;
+}
+};
+class InvalidAgeException: public Age{
+public:
+
+void check(){
+        if(age>=18 && age<=30 && (age%2!=0)){
+    throw"Invalid age: Ages between 18 and 30 must be even numbers";
+}
+else if(age>0 && age>=18 && age<=60){
+   cout<<"Age is valid";
+}
+else if(age<0){
+    throw"Invalid age: Age must be a non negative integer";
+}
+else if(age>0 && age<18){
+    throw"Invalid age: Age must be between 18 and 60";
+}
+
+}
+};
+int main(){
+try{
+    int u;
+    cout<<"Enter age:"<<endl;
+    cin>>u;
+    InvalidAgeException umar;
+    umar.setAge(u);
+    umar.check();
+}
+  catch(const char * str){
+    cout<<"InvalidAgeException:"<<str;
+  }
+  catch(...){
+    cout<<"Unknown error";
+  }
+    return 0;
+}
